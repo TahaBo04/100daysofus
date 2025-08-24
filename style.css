@@ -1,0 +1,145 @@
+:root{
+  --bg:#0b0b12;
+  --ink:#ffffff;
+  --muted:#b8b8c7;
+  --accent:#ff3e7f;
+  --accent-2:#6f7cff;
+  --glass:rgba(255,255,255,0.08);
+  --glow:0 0 22px rgba(255,62,127,.55);
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:'Poppins',sans-serif;
+  background: radial-gradient(1200px 800px at 70% -20%, #1b1b2a 0%, #0b0b12 60%);
+  color:var(--ink);
+  overflow-x:hidden;
+}
+
+.script{font-family:'Great Vibes',cursive}
+#hearts{
+  position:fixed; inset:0; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(12px 10px at 20% 30%, rgba(255,62,127,.25), transparent 70%),
+    radial-gradient(10px 8px  at 80% 40%, rgba(111,124,255,.22), transparent 70%),
+    radial-gradient(8px 6px   at 30% 80%, rgba(255,62,127,.20), transparent 70%),
+    radial-gradient(10px 8px  at 60% 70%, rgba(111,124,255,.18), transparent 70%);
+  filter: blur(1px);
+  animation: floatBg 18s linear infinite alternate;
+}
+@keyframes floatBg{to{transform:translateY(-20px) translateX(10px)}}
+
+.hero{text-align:center; padding:90px 20px 40px}
+.hero h1{
+  font-size:clamp(2.2rem,5vw,4.2rem); line-height:1.05; margin:0 auto 8px; text-shadow:var(--glow)
+}
+.hero .thin{font-weight:300;color:var(--accent)}
+.tagline{color:var(--muted); margin:0 auto 14px; max-width:800px}
+
+.badges{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin:14px 0 4px}
+.badge{
+  display:flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px;
+  background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+  border:1px solid #ffffff14; backdrop-filter: blur(6px);
+}
+.badge-icon{font-size:1.1rem}
+.badge-text{opacity:.95}
+
+.cta-bar{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin:18px 0 28px}
+.btn{
+  border:none; border-radius:12px; padding:12px 18px; font-weight:600;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  color:#fff; cursor:pointer; transition:transform .12s ease, box-shadow .2s;
+}
+.btn:hover{transform:translateY(-2px); box-shadow:var(--glow)}
+.btn:active{transform:translateY(0) scale(.98)}
+.btn.outline{background:transparent; border:1.5px solid #fff3; color:#fff; backdrop-filter: blur(6px)}
+.btn.tiny{font-size:.85rem; padding:8px 12px}
+.glow{box-shadow:var(--glow)}
+
+.streak-card{
+  margin:20px auto 0; padding:18px 20px; width:min(720px, 92%);
+  background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+  border:1px solid #ffffff10; border-radius:16px; backdrop-filter: blur(8px);
+}
+.streak-number{font-size:clamp(1.6rem,4.5vw,2.6rem); font-weight:700}
+.streak-sub{color:var(--muted); margin-top:6px}
+.start-date{color:#9aa; display:inline-block; margin-top:8px}
+
+.section{padding:40px 16px}
+.section-title{text-align:center; margin:0 auto 8px; font-size:clamp(1.4rem,3.5vw,2rem)}
+.section-sub{text-align:center; color:var(--muted); margin:0 auto 20px}
+
+.timeline{display:grid; gap:16px; width:min(950px,92%); margin:0 auto}
+.milestone{display:grid; grid-template-columns:56px 1fr; gap:14px; align-items:center}
+.dot{
+  width:56px;height:56px;border-radius:50%;
+  background:radial-gradient(120% 120% at 30% 30%, #fff, #ff9ec0 40%, #ff5d98 60%, #ff3e7f);
+  display:flex;align-items:center;justify-content:center;font-weight:800;color:#1a0e14;
+  box-shadow:0 6px 18px rgba(255,62,127,.35)
+}
+.dot.hot{background:radial-gradient(120% 120% at 30% 30%, #fff, #a9b0ff 40%, #7d89ff 60%, #6f7cff)}
+.card{background:var(--glass); border:1px solid #ffffff14; border-radius:14px; padding:14px 16px}
+
+.phones{
+  display:grid; gap:18px; grid-template-columns:repeat(2, minmax(260px, 320px));
+  place-content:center; margin:0 auto; width:min(900px, 96%);
+}
+.phone{
+  justify-self:center;
+}
+.lock{
+  position:relative; height:560px; border-radius:38px; padding:16px; display:grid; place-items:center;
+  background:linear-gradient(140deg,#101423,#0e0f17 40%, #171c2b 100%);
+  border:2px solid #2a2f43; box-shadow:0 18px 38px rgba(0,0,0,.45), inset 0 0 0 6px #000;
+  width:100%;
+}
+.notch{position:absolute; top:10px; left:50%; transform:translateX(-50%); width:36%; height:28px; background:#000; border-bottom-left-radius:18px; border-bottom-right-radius:18px}
+.lock-text{
+  color:#e9e9f5; font-size:clamp(1.3rem, 2.6vw, 2rem); text-align:center; padding:0 20px;
+}
+.caption{text-align:center; color:#cbd; margin-top:8px}
+
+.anthems{
+  width:min(900px,92%); margin:0 auto; display:grid; gap:14px; grid-template-columns:1fr; 
+}
+.anthem-card{
+  padding:16px; border-radius:14px; background:var(--glass); border:1px solid #ffffff14;
+}
+.anthem-card h3{margin:0 0 10px}
+.anthem-actions{margin-top:10px}
+.hint{display:block; text-align:center; color:#9fb}
+
+.gallery{width:min(1050px,92%); margin:6px auto 0; display:grid; grid-template-columns:repeat(3,1fr); gap:10px}
+.gallery-img{
+  width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:12px; cursor:pointer;
+  transition:transform .15s ease, box-shadow .2s ease; box-shadow:0 6px 18px rgba(0,0,0,.35)
+}
+.gallery-img:hover{transform:translateY(-3px)}
+
+.letter{
+  width:min(850px,92%); margin:10px auto 0; padding:22px 20px; background:#11141f;
+  border:1px solid #ffffff14; border-radius:16px;
+}
+.letter p{color:#e9e9f5}
+.letter .signature{opacity:.85; margin-top:8px}
+
+.footer{text-align:center; padding:24px 16px 60px; color:#cbd; font-size:.95rem}
+
+/* Lightbox */
+.lightbox{position:fixed; inset:0; display:grid; place-items:center; background:rgba(0,0,0,.75); backdrop-filter:blur(4px); z-index:50}
+.lightbox img{max-width:min(92vw,1100px); max-height:80vh; border-radius:14px}
+.close{
+  position:fixed; top:18px; right:18px; font-size:32px; width:42px; height:42px; border-radius:10px; border:none; cursor:pointer;
+  background:#fff; color:#111;
+}
+#confetti-canvas{position:fixed; inset:0; pointer-events:none; z-index:40}
+
+/* Responsive */
+@media (max-width: 900px){ .phones{grid-template-columns:1fr} }
+@media (max-width: 720px){
+  .milestone{grid-template-columns:44px 1fr}
+  .dot{width:44px;height:44px}
+  .gallery{grid-template-columns:repeat(2,1fr)}
+}
