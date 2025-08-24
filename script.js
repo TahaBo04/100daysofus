@@ -42,7 +42,6 @@ if (revealLetterBtn && loveLetter){
     if (hidden) {
       loveLetter.removeAttribute("hidden");
       revealLetterBtn.textContent = "Hide my letter 💌";
-      fireConfetti(240);
     } else {
       loveLetter.setAttribute("hidden", "");
       revealLetterBtn.textContent = "Open my letter 💌";
