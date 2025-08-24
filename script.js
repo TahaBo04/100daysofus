@@ -35,7 +35,7 @@ const diffDays = Math.max(1, Math.floor((today - startDate) / (24*3600*1000)) + 
 if (streakDaysEl) streakDaysEl.textContent = diffDays;
 if (streakNumber) streakNumber.textContent = `Day ${diffDays} ❤️`;
 
-/* Letter toggle */
+/* Letter toggle (no confetti here) */
 if (revealLetterBtn && loveLetter){
   revealLetterBtn.addEventListener("click", () => {
     const hidden = loveLetter.hasAttribute("hidden");
@@ -50,37 +50,42 @@ if (revealLetterBtn && loveLetter){
 }
 
 /* Confetti */
-const ctx = confettiCanvas.getContext("2d");
-let confettiPieces = [];
-const colors = ["#ff3e7f","#ffb3cd","#6f7cff","#b3b8ff","#f9d66b","#7ce3a1"];
-function random(min, max){ return Math.random()*(max-min)+min }
-function createConfetti(count){
-  const { width, height } = confettiCanvas;
-  for (let i = 0; i < count; i++){
-    confettiPieces.push({
-      x: random(0, width), y: random(-20, -height*0.2), r: random(3, 6),
-      c: colors[Math.floor(random(0, colors.length))], vy: random(2, 4.5),
-      vx: random(-1.5, 1.5), rot: random(0, Math.PI*2), vr: random(-0.05, 0.05)
-    });
+if (confettiCanvas) {
+  const ctx = confettiCanvas.getContext("2d");
+  let confettiPieces = [];
+  const colors = ["#ff3e7f","#ffb3cd","#6f7cff","#b3b8ff","#f9d66b","#7ce3a1"];
+
+  function random(min, max){ return Math.random()*(max-min)+min }
+  function createConfetti(count){
+    const { width, height } = confettiCanvas;
+    for (let i = 0; i < count; i++){
+      confettiPieces.push({
+        x: random(0, width), y: random(-20, -height*0.2), r: random(3, 6),
+        c: colors[Math.floor(random(0, colors.length))], vy: random(2, 4.5),
+        vx: random(-1.5, 1.5), rot: random(0, Math.PI*2), vr: random(-0.05, 0.05)
+      });
+    }
   }
+  function resizeCanvas(){ confettiCanvas.width = window.innerWidth; confettiCanvas.height = window.innerHeight; }
+  resizeCanvas(); window.addEventListener("resize", resizeCanvas);
+
+  function drawConfetti(){
+    const { width, height } = confettiCanvas;
+    ctx.clearRect(0,0,width,height);
+    confettiPieces.forEach(p=>{
+      p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+      if (p.y > height + 10) { p.y = -10; p.x = random(0,width); }
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+      ctx.fillStyle = p.c; ctx.fillRect(-p.r, -p.r, p.r*2, p.r*2);
+      ctx.restore();
+    });
+    requestAnimationFrame(drawConfetti);
+  }
+  drawConfetti();
+
+  function fireConfetti(n=200){ createConfetti(n); }
+  if (confettiBtn) confettiBtn.addEventListener("click", ()=> fireConfetti(240));
 }
-function resizeCanvas(){ confettiCanvas.width = window.innerWidth; confettiCanvas.height = window.innerHeight; }
-resizeCanvas(); window.addEventListener("resize", resizeCanvas);
-function drawConfetti(){
-  const { width, height } = confettiCanvas;
-  ctx.clearRect(0,0,width,height);
-  confettiPieces.forEach(p=>{
-    p.x += p.vx; p.y += p.vy; p.rot += p.vr;
-    if (p.y > height + 10) { p.y = -10; p.x = random(0,width); }
-    ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
-    ctx.fillStyle = p.c; ctx.fillRect(-p.r, -p.r, p.r*2, p.r*2);
-    ctx.restore();
-  });
-  requestAnimationFrame(drawConfetti);
-}
-drawConfetti();
-function fireConfetti(n=200){ createConfetti(n); }
-if (confettiBtn) confettiBtn.addEventListener("click", ()=> fireConfetti(240));
 
 /* Optional: make gallery paths work even if you open site at root instead of /repo/ */
 (function fixBasePath(){
