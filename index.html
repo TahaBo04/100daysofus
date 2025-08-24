@@ -7,6 +7,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <meta name="theme-color" content="#ff3e7f">
+  <!-- Make relative paths work from both / and /100daysofus/ -->
+  <base href="/100daysofus/">
 </head>
 <body>
   <div id="hearts"></div>
@@ -38,19 +40,29 @@
     </div>
   </header>
 
-  <!-- VOW WALLPAPERS -->
+  <!-- VOW WALLPAPERS (real images) -->
   <section class="section">
     <h2 class="section-title">Our wallpaper vows</h2>
     <p class="section-sub">Two screens, one promise.</p>
+
     <div class="phones">
-      <div class="phone">
-        <div class="lock"><div class="notch"></div><div class="lock-text">“if I betray you”</div></div>
-        <div class="caption">Her lock screen</div>
-      </div>
-      <div class="phone">
-        <div class="lock"><div class="notch"></div><div class="lock-text">“I betray myself”</div></div>
-        <div class="caption">My lock screen</div>
-      </div>
+      <!-- Her phone -->
+      <figure class="phone">
+        <div class="frame">
+          <img class="lock-img" src="assets/lock-her.jpeg" alt="If I betray you..." loading="lazy">
+          <div class="notch"></div>
+        </div>
+        <figcaption class="caption">Her lock screen</figcaption>
+      </figure>
+
+      <!-- Your phone -->
+      <figure class="phone">
+        <div class="frame">
+          <img class="lock-img" src="assets/lock-me.jpeg" alt="...I betray myself" loading="lazy">
+          <div class="notch"></div>
+        </div>
+        <figcaption class="caption">My lock screen</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -88,19 +100,19 @@
         </div>
       </div>
     </div>
-    <small class="hint">You are everything , the true one and only <code>love</code> , loving you is a blessing and being with you is heaven on earth .</small>
+    <small class="hint">You are everything, the true one and only <code>love</code>. Loving you is a blessing, being with you is heaven on earth.</small>
   </section>
 
   <!-- GALLERY (inline images, no fullscreen) -->
   <section class="section">
     <h2 class="section-title">Our little gallery</h2>
     <div class="gallery">
-      <img src="assets/pic1.jpeg" alt="Memory 1" class="gallery-img" />
-      <img src="assets/pic2.jpeg" alt="Memory 2" class="gallery-img" />
-      <img src="assets/pic3.jpeg" alt="Memory 3" class="gallery-img" />
-      <img src="assets/pic4.jpeg" alt="Memory 4" class="gallery-img" />
-      <img src="assets/pic5.jpeg" alt="Memory 5" class="gallery-img" />
-      <img src="assets/pic6.jpeg" alt="Memory 6" class="gallery-img" />
+      <img src="assets/pic1.jpeg" alt="Memory 1" class="gallery-img" loading="lazy"/>
+      <img src="assets/pic2.jpeg" alt="Memory 2" class="gallery-img" loading="lazy"/>
+      <img src="assets/pic3.jpeg" alt="Memory 3" class="gallery-img" loading="lazy"/>
+      <img src="assets/pic4.jpeg" alt="Memory 4" class="gallery-img" loading="lazy"/>
+      <img src="assets/pic5.jpeg" alt="Memory 5" class="gallery-img" loading="lazy"/>
+      <img src="assets/pic6.jpeg" alt="Memory 6" class="gallery-img" loading="lazy"/>
     </div>
   </section>
 
@@ -119,7 +131,7 @@
 
   <!-- FOOTER -->
   <footer class="footer">
-    <p>Made with love by <span id="myNameFooter">Taha</span> for <span id="herNameFooter">You</span> • <span class="script">to our next 1000 days and more inchaalah a 7biba </span> ❤️</p>
+    <p>Made with love by <span id="myNameFooter">Taha</span> for <span id="herNameFooter">You</span> • <span class="script">to our next 1000 days and more inchaalah a 7biba</span> ❤️</p>
   </footer>
 
   <script src="script.js"></script>
