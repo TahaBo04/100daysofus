@@ -16,8 +16,11 @@ body{
   color:var(--ink);
   overflow-x:hidden;
 }
+img{display:block; max-width:100%; height:auto}
 
 .script{font-family:'Great Vibes',cursive}
+
+/* Floating hearts bg */
 #hearts{
   position:fixed; inset:0; z-index:-1; pointer-events:none;
   background:
@@ -30,6 +33,7 @@ body{
 }
 @keyframes floatBg{to{transform:translateY(-20px) translateX(10px)}}
 
+/* Hero */
 .hero{text-align:center; padding:90px 20px 40px}
 .hero h1{
   font-size:clamp(2.2rem,5vw,4.2rem); line-height:1.05; margin:0 auto 8px; text-shadow:var(--glow)
@@ -37,6 +41,7 @@ body{
 .hero .thin{font-weight:300;color:var(--accent)}
 .tagline{color:var(--muted); margin:0 auto 14px; max-width:800px}
 
+/* Badges & buttons */
 .badges{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin:14px 0 4px}
 .badge{
   display:flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px;
@@ -58,6 +63,7 @@ body{
 .btn.tiny{font-size:.85rem; padding:8px 12px}
 .glow{box-shadow:var(--glow)}
 
+/* Streak card */
 .streak-card{
   margin:20px auto 0; padding:18px 20px; width:min(720px, 92%);
   background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
@@ -67,10 +73,12 @@ body{
 .streak-sub{color:var(--muted); margin-top:6px}
 .start-date{color:#9aa; display:inline-block; margin-top:8px}
 
+/* Sections */
 .section{padding:40px 16px}
 .section-title{text-align:center; margin:0 auto 8px; font-size:clamp(1.4rem,3.5vw,2rem)}
 .section-sub{text-align:center; color:var(--muted); margin:0 auto 20px}
 
+/* Timeline */
 .timeline{display:grid; gap:16px; width:min(950px,92%); margin:0 auto}
 .milestone{display:grid; grid-template-columns:56px 1fr; gap:14px; align-items:center}
 .dot{
@@ -79,30 +87,36 @@ body{
   display:flex;align-items:center;justify-content:center;font-weight:800;color:#1a0e14;
   box-shadow:0 6px 18px rgba(255,62,127,.35)
 }
-.dot.hot{background:radial-gradient(120% 120% at 30% 30%, #fff, #a9b0ff 40%, #7d89ff 60%, #6f7cff)}
+.dot.hot{
+  background:radial-gradient(120% 120% at 30% 30%, #fff, #a9b0ff 40%, #7d89ff 60%, #6f7cff)
+}
 .card{background:var(--glass); border:1px solid #ffffff14; border-radius:14px; padding:14px 16px}
 
+/* Phone gallery with real lock screens */
 .phones{
-  display:grid; gap:18px; grid-template-columns:repeat(2, minmax(260px, 320px));
+  display:grid; gap:18px;
+  grid-template-columns:repeat(2, minmax(260px, 320px));
   place-content:center; margin:0 auto; width:min(900px, 96%);
 }
-.phone{
-  justify-self:center;
+.phone{ justify-self:center; }
+.frame{
+  position:relative; width:100%; aspect-ratio: 9 / 19.5;
+  border-radius:38px; overflow:hidden; border:2px solid #2a2f43;
+  box-shadow:0 18px 38px rgba(0,0,0,.45), inset 0 0 0 6px #000; background:#000;
 }
-.lock{
-  position:relative; height:560px; border-radius:38px; padding:16px; display:grid; place-items:center;
-  background:linear-gradient(140deg,#101423,#0e0f17 40%, #171c2b 100%);
-  border:2px solid #2a2f43; box-shadow:0 18px 38px rgba(0,0,0,.45), inset 0 0 0 6px #000;
-  width:100%;
+.lock-img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.notch{
+  position:absolute; top:10px; left:50%; transform:translateX(-50%);
+  width:36%; height:28px; background:#000;
+  border-bottom-left-radius:18px; border-bottom-right-radius:18px;
+  z-index:2; /* ensure above image */
 }
-.notch{position:absolute; top:10px; left:50%; transform:translateX(-50%); width:36%; height:28px; background:#000; border-bottom-left-radius:18px; border-bottom-right-radius:18px}
-.lock-text{
-  color:#e9e9f5; font-size:clamp(1.3rem, 2.6vw, 2rem); text-align:center; padding:0 20px;
-}
-.caption{text-align:center; color:#cbd; margin-top:8px}
+.caption{ text-align:center; color:#cbd; margin-top:8px; }
+@media (max-width: 900px){ .phones{ grid-template-columns:1fr } }
 
+/* Anthems */
 .anthems{
-  width:min(900px,92%); margin:0 auto; display:grid; gap:14px; grid-template-columns:1fr; 
+  width:min(900px,92%); margin:0 auto; display:grid; gap:14px; grid-template-columns:1fr;
 }
 .anthem-card{
   padding:16px; border-radius:14px; background:var(--glass); border:1px solid #ffffff14;
@@ -111,33 +125,31 @@ body{
 .anthem-actions{margin-top:10px}
 .hint{display:block; text-align:center; color:#9fb}
 
-.gallery{width:min(1050px,92%); margin:6px auto 0; display:grid; grid-template-columns:repeat(3,1fr); gap:10px}
+/* Gallery (inline) */
+.gallery{
+  width:min(1050px,92%); margin:6px auto 0;
+  display:grid; grid-template-columns:repeat(3,1fr); gap:10px
+}
 .gallery-img{
-  width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:12px; cursor:pointer;
-  transition:transform .15s ease, box-shadow .2s ease; box-shadow:0 6px 18px rgba(0,0,0,.35)
+  width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:12px;
+  transition:transform .15s ease, box-shadow .2s ease; box-shadow:0 6px 18px rgba(0,0,0,.35);
+  cursor:default; /* not clickable anymore */
 }
 .gallery-img:hover{transform:translateY(-3px)}
 
+/* Letter & footer */
 .letter{
   width:min(850px,92%); margin:10px auto 0; padding:22px 20px; background:#11141f;
   border:1px solid #ffffff14; border-radius:16px;
 }
 .letter p{color:#e9e9f5}
 .letter .signature{opacity:.85; margin-top:8px}
+.footer{ text-align:center; padding:24px 16px 60px; color:#cbd; font-size:.95rem }
 
-.footer{text-align:center; padding:24px 16px 60px; color:#cbd; font-size:.95rem}
-
-/* Lightbox */
-.lightbox{position:fixed; inset:0; display:grid; place-items:center; background:rgba(0,0,0,.75); backdrop-filter:blur(4px); z-index:50}
-.lightbox img{max-width:min(92vw,1100px); max-height:80vh; border-radius:14px}
-.close{
-  position:fixed; top:18px; right:18px; font-size:32px; width:42px; height:42px; border-radius:10px; border:none; cursor:pointer;
-  background:#fff; color:#111;
-}
+/* Confetti canvas */
 #confetti-canvas{position:fixed; inset:0; pointer-events:none; z-index:40}
 
-/* Responsive */
-@media (max-width: 900px){ .phones{grid-template-columns:1fr} }
+/* Responsive extras */
 @media (max-width: 720px){
   .milestone{grid-template-columns:44px 1fr}
   .dot{width:44px;height:44px}
