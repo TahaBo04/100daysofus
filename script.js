@@ -1,7 +1,6 @@
 /* Personal settings */
 const HER_NAME = "Soumaya";
 const YOUR_NAME = "Taha";
-// If you want exact streak start date, set it (YYYY-MM-DD). Else it assumes "today is day 100".
 const STREAK_START = ""; // e.g., "2025-05-16"
 
 /* DOM refs */
@@ -37,7 +36,8 @@ if (streakNumber) streakNumber.textContent = `Day ${diffDays} ❤️`;
 
 /* Letter toggle (no confetti here) */
 if (revealLetterBtn && loveLetter){
-  revealLetterBtn.addEventListener("click", () => {
+  revealLetterBtn.addEventListener("click", (e) => {
+    e.stopPropagation(); // make sure it doesn't bubble to anything weird
     const hidden = loveLetter.hasAttribute("hidden");
     if (hidden) {
       loveLetter.removeAttribute("hidden");
@@ -49,7 +49,9 @@ if (revealLetterBtn && loveLetter){
   });
 }
 
-/* Confetti */
+/* Confetti (guarded) */
+let CONFETTI_ENABLED = false;
+
 if (confettiCanvas) {
   const ctx = confettiCanvas.getContext("2d");
   let confettiPieces = [];
@@ -83,8 +85,23 @@ if (confettiCanvas) {
   }
   drawConfetti();
 
-  function fireConfetti(n=200){ createConfetti(n); }
-  if (confettiBtn) confettiBtn.addEventListener("click", ()=> fireConfetti(240));
+  // Only allow confetti when Celebrate button explicitly enables it
+  function fireConfetti(n=200){ if (!CONFETTI_ENABLED) return; createConfetti(n); }
+
+  if (confettiBtn) {
+    confettiBtn.addEventListener("click", (e)=> {
+      e.stopPropagation();
+      CONFETTI_ENABLED = true;
+      fireConfetti(240);
+      // briefly allow, then lock it again
+      setTimeout(()=> { CONFETTI_ENABLED = false; }, 200);
+    });
+  }
+
+  // Optional: disable confetti on any other clicks just in case
+  document.addEventListener("click", (e)=>{
+    if (e.target !== confettiBtn) CONFETTI_ENABLED = false;
+  }, true);
 }
 
 /* Optional: make gallery paths work even if you open site at root instead of /repo/ */
